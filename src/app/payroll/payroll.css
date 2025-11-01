@@ -1,0 +1,98 @@
+.payroll-page {
+  max-width: 800px;
+  margin: auto;
+  font-family: sans-serif;
+}
+section {
+  margin-bottom: 2rem;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 0.5rem;
+  border-bottom: 1px solid #ccc;
+}
+h2, h3 {
+  margin-bottom: 0.5rem;
+}
+
+.date-selector {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.date-selector label {
+  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  font-size: 0.95rem;
+}
+
+.date-selector select {
+  padding: 0.4rem 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  margin-top: 0.3rem;
+  background-color: #f9f9f9;
+}
+
+.date-selector button {
+  padding: 0.5rem 1rem;
+  background-color: #0078d4;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.date-selector button:hover {
+  background-color: #005fa3;
+}
+
+.summary-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.summary-table th {
+  background-color: #f0f0f0;
+  text-align: left;
+  padding: 0.5rem;
+}
+
+.summary-table td {
+  padding: 0.5rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.summary-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.summary-table th {
+  background-color: #f0f0f0;
+  text-align: left;
+  padding: 0.5rem;
+}
+
+.summary-table td {
+  padding: 0.5rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.total-row {
+  background-color: #f0f0f0;
+}
+
+

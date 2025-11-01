@@ -1,0 +1,17 @@
+<div class="login-container">
+  <h2>Giriş Yap</h2>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <label>Email:</label>
+    <input type="email" formControlName="email" required />
+
+    <label>Şifre:</label>
+    <input type="password" formControlName="password" required />
+
+    <button type="submit">Giriş</button>
+  </form>
+  <div class="register-option">
+    <p>Hesabın yok mu?</p>
+    <button (click)="goToRegister()">Kayıt Ol</button>
+  </div>
+</div>
+

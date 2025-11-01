@@ -1,0 +1,36 @@
+<table>
+    <thead>
+        <tr>
+            <th>Kod</th>
+            <th>Adım</th>
+            <th>Yıl</th>
+            <th>Haftalık</th>
+            <th>4 Haftalık</th>
+            <th>Aylık</th>
+            <th>%100</th>
+            <th>%130</th>
+            <th>%150</th>
+            <th>İşlem</th> <!-- ✅ Yeni sütun -->
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let s of scales">
+            <td>{{ s.scaleCode }}</td>
+            <td>{{ s.step }}</td>
+            <td>{{ s.year }}</td>
+            <td>{{ s.weeklySalary }}</td>
+            <td>{{ s.fourWeeklySalary }}</td>
+            <td>{{ s.monthlySalary }}</td>
+            <td>{{ s.hourlyWage100 }}</td>
+            <td>{{ s.hourlyWage130 }}</td>
+            <td>{{ s.hourlyWage150 }}</td>
+            <td>
+                <button (click)="editScale(s)">Güncelle</button>
+                <button (click)="deleteScale(s.id)">Sil</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<div class="add-button-container">
+  <button (click)="addScale()">➕ Skala Ekle</button>
+</div>

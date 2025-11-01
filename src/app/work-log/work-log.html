@@ -1,0 +1,32 @@
+<div class="month-year-controls">
+  <button (click)="prevMonth()">‹</button>
+  <span>{{ monthNames[selectedMonth] }} {{ selectedYear }}</span>
+  <button (click)="nextMonth()">›</button>
+</div>
+
+<div class="weekdays-row">
+  <div class="weekday" *ngFor="let day of weekdayNames">
+    {{ day }}
+  </div>
+</div>
+
+<div class="calendar-grid">
+  <div *ngFor="let day of days; trackBy: trackByDate" class="day-box" [ngClass]="day ? getDayClass(day) : 'empty'"
+    (click)="day && openModal(day)">
+    <div class="day-top">
+      {{ day ? getWeekdayName(day) + ' ' + (day | date:'dd MMM yyyy') : '' }}
+    </div>
+
+    <div class="day-bottom" *ngIf="day">
+      <span class="hours">
+        {{ getWorkHours(day) }}h
+      </span>
+      <span class="toeslag">
+        €{{ getTruckStayToeslag(day) }}
+      </span>
+    </div>
+  </div>
+</div>
+
+<app-work-entry-modal [initialData]="modalInitialData" [selectedDate]="selectedDate" (close)="closeModal()"
+  (deleteFullDay)="handleDeleteFullDay($event.workEntryId, $event.segmentId)"(refreshRequested)="loadWorkEntries()"></app-work-entry-modal>

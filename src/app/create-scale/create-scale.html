@@ -1,0 +1,30 @@
+<form (ngSubmit)="submit()">
+    <label>Skala Kodu:</label>
+    <input [(ngModel)]="scale.scaleCode" name="code" required />
+
+    <label>Adım (Trede):</label>
+    <input type="number" [(ngModel)]="scale.step" name="step" required />
+
+    <label>Yıl:</label>
+    <input type="number" [(ngModel)]="scale.year" name="year" required />
+
+    <label>Haftalık Maaş:</label>
+    <input type="number" [(ngModel)]="scale.weeklySalary" name="weekly" />
+
+    <label>4 Haftalık Maaş:</label>
+    <input type="number" [(ngModel)]="scale.fourWeeklySalary" name="fourweekly" />
+
+    <label>Aylık Maaş:</label>
+    <input type="number" [(ngModel)]="scale.monthlySalary" name="monthly" />
+
+    <label>Uurloon %100:</label>
+    <input type="number" [(ngModel)]="scale.hourlyWage100" name="w100" />
+
+    <label>Uurloon %130:</label>
+    <input type="number" [(ngModel)]="scale.hourlyWage130" name="w130" />
+
+    <label>Uurloon %150:</label>
+    <input type="number" [(ngModel)]="scale.hourlyWage150" name="w150" />
+
+    <button type="submit">Skala Ekle</button>
+</form>

@@ -1,0 +1,56 @@
+<div class="modal-container">
+  <h2>Work Entry – {{ selectedDate | date: 'fullDate' }}</h2>
+
+  <form [formGroup]="workForm" novalidate>
+    <!-- 🕒 Çalışma Saatleri -->
+    <fieldset [formGroupName]="'workHoursGroup'">
+      <legend>Work Hours</legend>
+      <div class="time-row">
+        <div class="form-group">
+          <label for="startTime">Start</label>
+          <input type="time" id="startTime" formControlName="startTime" />
+        </div>
+        <div class="form-group">
+          <label for="endTime">End</label>
+          <input type="time" id="endTime" formControlName="endTime" />
+        </div>
+        <div class="form-group">
+          <label for="breakTime">Break</label>
+          <input type="time" id="breakTime" formControlName="breakTime" />
+        </div>
+      </div>
+    </fieldset>
+
+    <!-- 🛏️ Tırda Kalma Süresi -->
+    <fieldset [formGroupName]="'truckStayGroup'">
+      <legend>Truck Stay</legend>
+      <div class="form-group">
+        <label for="stayStart">Start</label>
+        <input type="datetime-local" id="stayStart" formControlName="stayStart"
+          [attr.min]="selectedDate ? (selectedDate | date:'yyyy-MM-dd') + 'T00:00' : null" />
+      </div>
+      <div class="form-group">
+        <label for="stayEnd">End</label>
+        <input type="datetime-local" id="stayEnd" formControlName="stayEnd"
+          [attr.min]="selectedDate ? (selectedDate | date:'yyyy-MM-dd') + 'T00:00' : null" />
+      </div>
+    </fieldset>
+
+    <!-- 📦 Segment Bilgisi -->
+    <div *ngIf="initialData?.segmentType" class="segment-info">
+      <p><strong>Segment Type:</strong> {{ initialData?.segmentType }}</p>
+      <p><strong>Stay:</strong> {{ initialData?.stayStart }} → {{ initialData?.stayEnd }}</p>
+    </div>
+    <div class="button-row">
+      <button type="button" class="save-btn" (click)="onSubmit()">💾 Save</button>
+      <button type="button" class="cancel-btn" (click)="closeModal()">✖ Cancel</button>
+      <button type="button" class="delete-btn" (click)="deleteFullDay.emit({
+          workEntryId: initialData?.workEntryId ? +initialData?.workEntryId! : undefined,
+          segmentId: initialData?.segmentId ? +initialData?.segmentId! : undefined
+          })">
+        🗑️ Günü Sil
+      </button>
+      <button type="button" class="update-btn" disabled>🔄 Update (coming soon)</button>
+    </div>
+  </form>
+</div>

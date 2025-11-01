@@ -1,0 +1,20 @@
+<h2>Bilgilerini Güncelle</h2>
+<form [formGroup]="updateForm" (ngSubmit)="onSubmit()">
+  <label>Ad Soyad</label>
+  <input formControlName="fullName" type="text" />
+
+  <label>Email</label>
+  <input formControlName="email" type="email" />
+
+  <label>Mevcut Şifre</label>
+  <input formControlName="currentPassword" type="password" />
+
+  <label>Yeni Şifre (opsiyonel)</label>
+  <input formControlName="newPassword" type="password" />
+
+  <!-- ✅ Saatlik ücret yerine skala seviyesi -->
+  <label>Skala Seviyesi (örn: D6)</label>
+  <input formControlName="salaryLevel" type="text" placeholder="Örn: D6" required />
+
+  <button type="submit">Güncelle</button>
+</form>

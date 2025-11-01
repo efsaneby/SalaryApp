@@ -1,0 +1,33 @@
+<div class="register-container">
+  <h2>Kayıt Ol</h2>
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <!-- 👤 Kişisel Bilgiler -->
+    <label>Ad Soyad:</label>
+    <input type="text" formControlName="fullName" required>
+
+    <label>Email:</label>
+    <input type="email" formControlName="email" required />
+
+    <label>Şifre:</label>
+    <input type="password" formControlName="password" required />
+
+    <label>Şifre Tekrar:</label>
+    <input type="password" formControlName="confirmPassword" required />
+
+    <!-- 💼 İş Bilgileri -->
+    <label>Skala Seviyesi (örn: D6):</label>
+    <input type="text" formControlName="salaryLevel" required placeholder="Örn: D6" />
+
+
+    <label>Vardiya Tipi:</label>
+    <select formControlName="shiftType" required>
+      <option value="normal">Normal</option>
+      <option value="ploegendienst">Ploegendienst</option>
+    </select>
+
+    <label>İşe Başlangıç Tarihi:</label>
+    <input type="date" formControlName="startDate" required />
+
+    <button type="submit">Kayıt Ol</button>
+  </form>
+</div>

@@ -1,0 +1,33 @@
+<div *ngIf="scale">
+  <h2>Skala Güncelle</h2>
+
+  <label>Kod:</label>
+  <input [(ngModel)]="scale.scaleCode" />
+
+  <label>Adım:</label>
+  <input type="number" [(ngModel)]="scale.step" />
+
+  <label>Yıl:</label>
+  <input type="number" [(ngModel)]="scale.year" />
+
+  <label>Haftalık:</label>
+  <input type="number" [(ngModel)]="scale.weeklySalary" />
+
+  <label>4 Haftalık:</label>
+  <input type="number" [(ngModel)]="scale.fourWeeklySalary" />
+
+  <label>Aylık:</label>
+  <input type="number" [(ngModel)]="scale.monthlySalary" />
+
+  <label>%100:</label>
+  <input type="number" [(ngModel)]="scale.hourlyWage100" />
+
+  <label>%130:</label>
+  <input type="number" [(ngModel)]="scale.hourlyWage130" />
+
+  <label>%150:</label>
+  <input type="number" [(ngModel)]="scale.hourlyWage150" />
+
+  <button (click)="save()">Kaydet</button>
+</div>
+

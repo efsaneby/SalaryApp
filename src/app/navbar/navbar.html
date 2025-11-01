@@ -1,0 +1,19 @@
+<nav class="navbar">
+  <div class="nav-left">
+    <a *ngIf="!authService.isLoggedIn" routerLink="/register">Register</a>
+    <a routerLink="/update-profile">Update Profile</a>
+    <a *ngIf="authService.isLoggedIn" routerLink="/work-log">Work Log</a>
+    <a routerLink="/deductions">Deductions</a>
+    <a routerLink="/scales">Skala Listesi</a>
+    <a routerLink="/payroll" routerLinkActive="active">Bordro</a>
+
+
+  </div>
+  <div class="nav-right">
+    <span *ngIf="authService.isLoggedIn && authService.email" class="user-email">
+      {{ authService.email }}
+    </span>
+    <a *ngIf="!authService.isLoggedIn" routerLink="/login">Login</a>
+    <a *ngIf="authService.isLoggedIn" (click)="logout()" href="#">Logout</a>
+  </div>
+</nav>

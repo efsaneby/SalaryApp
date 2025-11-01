@@ -1,0 +1,146 @@
+.month-year-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.month-year-controls button {
+  padding: 6px 12px;
+  font-size: 18px;
+  border: none;
+  border-radius: 6px;
+  background-color: #3498db;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.month-year-controls button:hover {
+  background-color: #2980b9;
+}
+
+/* ✅ Gün isimleri satırı */
+.weekdays-row {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); /* sabit 7 sütun */
+  gap: 12px;
+  max-width: 800px;
+  margin: 20px auto 0;
+  font-weight: 600;
+  color: #2c3e50;
+  text-align: center;
+}
+
+.weekday {
+  padding: 8px 0;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+/* ✅ Takvim kutuları */
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 12px;
+  margin-top: 20px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (max-width: 768px) {
+  .calendar-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .weekdays-row {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.day-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+  padding: 6px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.day-box:hover {
+  background-color: #d6eaf8;
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.day-box .day-top {
+  color: #34495e;
+  text-align: center;
+}
+
+.day-box .day-bottom {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 12px;
+  margin-top: 4px;
+  padding: 0 4px;
+}
+
+.day-box .hours {
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+.day-box .hours span {
+  font-weight: 400;
+  color: #7f8c8d;
+  margin-left: 4px;
+}
+
+.day-box .toeslag {
+  color: #16a085;
+  font-weight: 600;
+}
+
+.day-box .toeslag:empty::after {
+  content: "€0.00";
+  color: #bdc3c7;
+  font-weight: 400;
+}
+
+.day-box.today {
+  border: 2px solid #3498db;
+  background-color: #d6eaf8;
+  box-shadow: 0 0 6px rgba(52, 152, 219, 0.4);
+}
+
+.day-box.weekday {
+  background-color: #ecf0f1;
+}
+
+.day-box.saturday {
+  background-color: #f9e79f;
+}
+
+.day-box.sunday {
+  background-color: #f5b7b1;
+}
+
+.day-box.empty {
+  background-color: transparent;
+  box-shadow: none;
+  cursor: default;
+}

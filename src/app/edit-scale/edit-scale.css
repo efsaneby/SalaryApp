@@ -1,0 +1,53 @@
+/* Sayfa genel stil */
+div {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  font-family: Arial, sans-serif;
+}
+
+/* Başlık */
+h2 {
+  text-align: center;
+  margin-bottom: 24px;
+  color: #343a40;
+}
+
+/* Etiketler ve inputlar */
+label {
+  display: block;
+  margin-top: 12px;
+  font-weight: bold;
+  color: #495057;
+}
+
+input {
+  width: 100%;
+  padding: 8px 10px;
+  margin-top: 4px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+/* Kaydet butonu */
+button {
+  margin-top: 24px;
+  width: 100%;
+  padding: 10px;
+  background-color: #198754;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+button:hover {
+  background-color: #146c43;
+}
