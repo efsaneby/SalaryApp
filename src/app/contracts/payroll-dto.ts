@@ -19,6 +19,7 @@ export interface PayrollDto {
   overtimeHours130: number;
   saturdayHours150: number;
   sundayHours200: number;
+  nightToeslagTotal: number;
 
   workEntries: WorkDayDto[];
   truckStaySegments: TruckStaySegmentDto[];

@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { Component, EventEmitter, Input, OnInit, OnChanges, SimpleChanges, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-work-entry-modal',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, HttpClientModule],
+  imports: [ReactiveFormsModule,  HttpClientModule, CommonModule],
   templateUrl: './work-entry-modal.html',
   styleUrl: './work-entry-modal.css'
 })

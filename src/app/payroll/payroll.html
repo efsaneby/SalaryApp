@@ -35,22 +35,24 @@
                 <th>Break</th>
                 <th>Extra Break</th>
                 <th>Net Hours</th>
+                <th>Night Hours</th>
+                <th>Night Toeslag</th>
             </tr>
             <tr *ngFor="let entry of payroll?.workEntries">
                 <td>{{ entry.date }}</td>
                 <td>{{ entry.startTime }}</td>
                 <td>{{ entry.endTime }}</td>
                 <td>{{ entry.breakTime }}</td>
-                <td>{{ entry.extraBreakTime}}</td>
-                <td>{{ entry.netHours }}</td>
+                <td>{{ entry.extraBreakTime }}</td>
+                <td>{{ entry.netHours | number:'1.2-2' }}</td>
+                <td>{{ entry.nightHours | number:'1.2-2' }}</td>
+                <td>{{ entry.nightToeslagAmount | currency:'EUR' }}</td>
             </tr>
             <tr class="total-row">
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td colspan="5"></td>
                 <td style="font-weight: bold;">{{ totalNetHours | number:'1.2-2' }}</td>
+                <td></td>
+                <td></td>
             </tr>
         </table>
     </section>
@@ -137,6 +139,10 @@
             </tr>
             <tr>
                 <td>Sunday Hours (200%): {{ payroll.sundayHours200 * payroll.hourlyWage * 2.0 | currency:'EUR' }}</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Night Toeslag (sum): {{ payroll.nightToeslagTotal | currency:'EUR' }}</td> <!-- ✅ yeni satır -->
                 <td></td>
             </tr>
             <tr>
