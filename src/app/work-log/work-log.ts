@@ -179,7 +179,70 @@ export class WorkLog implements OnInit {
       });
   }
 
+  handleDeleteFullDay(workEntryId: number | null | undefined, segmentId: number | null | undefined) {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      alert("Yetkilendirme hatası. Lütfen tekrar giriş yapın.");
+      return;
+    }
 
+    const confirmed = window.confirm("Bu günün tüm kayıtları silinecek. Devam edilsin mi?");
+    if (!confirmed) return;
+
+    const headers = { Authorization: `Bearer ${token}` };
+
+    console.log("🧪 Silme çağrısı başlatılıyor:");
+    console.log("   - workEntryId:", workEntryId, "typeof:", typeof workEntryId);
+    console.log("   - segmentId:", segmentId, "typeof:", typeof segmentId);
+
+    // 🔁 Önce TruckStay sil
+    if (typeof segmentId === 'number' && !isNaN(segmentId)) {
+      this.http.delete(`https://localhost:7094/api/truckstay/group/${segmentId}`, { headers }).subscribe({
+        next: () => {
+          console.log(`✅ TruckStay silindi: segmentId=${segmentId}`);
+          this.loadTruckStaySegments();
+        },
+        error: (err) => {
+          if (err.status === 404) {
+            console.warn("⚠️ Segment zaten silinmiş olabilir.");
+          } else {
+            console.error("❌ TruckStay silme hatası:", err);
+            alert("TruckStay silme işlemi başarısız oldu.");
+          }
+        }
+      });
+    } else {
+      console.warn("⚠️ Geçersiz segmentId, silme çağrısı atlanıyor:", segmentId);
+    }
+
+    // 🔁 Sonra WorkEntry sil
+    if (typeof workEntryId === 'number' && !isNaN(workEntryId)) {
+      this.http.delete(`https://localhost:7094/api/worklog/entry/${workEntryId}`, { headers }).subscribe({
+        next: () => {
+          console.log(`✅ WorkEntry silindi: workEntryId=${workEntryId}`);
+          this.workMap.delete(this.getLocalDateKey(this.selectedDate!));
+          this.loadWorkEntries();
+        },
+        error: (err) => {
+          if (err.status === 404) {
+            console.warn("⚠️ WorkEntry zaten silinmiş olabilir.");
+          } else {
+            console.error("❌ WorkEntry silme hatası:", err);
+            alert("WorkEntry silme işlemi başarısız oldu.");
+          }
+        }
+      });
+    } else {
+      console.warn("⚠️ Geçersiz workEntryId, silme çağrısı atlanıyor:", workEntryId);
+    }
+
+    // 🔁 UI güncellemesi
+    setTimeout(() => {
+      this.updateCalendar();
+      this.cdr.detectChanges();
+      this.closeModal();
+    }, 500);
+  }
 
   getWorkHours(date: Date): number {
     const key = this.getLocalDateKey(date);
@@ -259,8 +322,11 @@ export class WorkLog implements OnInit {
     this.updateCalendar();
   }
 
-
-
+  formatHoursDecimal(hours: number): string {
+    const h = Math.floor(hours);
+    const m = Math.round((hours - h) * 60);
+    return `${h}h ${m}m`;
+  }
 
   openModal(date: Date) {
     this.selectedDate = date;
@@ -322,73 +388,6 @@ export class WorkLog implements OnInit {
     console.log('📦 SegmentMap entries:', Array.from(this.segmentMap.entries()));
     console.log('🧱 WorkMap entries:', Array.from(this.workMap.entries()));
   }
-
-  handleDeleteFullDay(workEntryId: number | null | undefined, segmentId: number | null | undefined) {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      alert("Yetkilendirme hatası. Lütfen tekrar giriş yapın.");
-      return;
-    }
-
-    const confirmed = window.confirm("Bu günün tüm kayıtları silinecek. Devam edilsin mi?");
-    if (!confirmed) return;
-
-    const headers = { Authorization: `Bearer ${token}` };
-
-    console.log("🧪 Silme çağrısı başlatılıyor:");
-    console.log("   - workEntryId:", workEntryId, "typeof:", typeof workEntryId);
-    console.log("   - segmentId:", segmentId, "typeof:", typeof segmentId);
-
-    // 🔁 Önce TruckStay sil
-    if (typeof segmentId === 'number' && !isNaN(segmentId)) {
-      this.http.delete(`https://localhost:7094/api/truckstay/group/${segmentId}`, { headers }).subscribe({
-        next: () => {
-          console.log(`✅ TruckStay silindi: segmentId=${segmentId}`);
-          this.loadTruckStaySegments();
-        },
-        error: (err) => {
-          if (err.status === 404) {
-            console.warn("⚠️ Segment zaten silinmiş olabilir.");
-          } else {
-            console.error("❌ TruckStay silme hatası:", err);
-            alert("TruckStay silme işlemi başarısız oldu.");
-          }
-        }
-      });
-    } else {
-      console.warn("⚠️ Geçersiz segmentId, silme çağrısı atlanıyor:", segmentId);
-    }
-
-    // 🔁 Sonra WorkEntry sil
-    if (typeof workEntryId === 'number' && !isNaN(workEntryId)) {
-      this.http.delete(`https://localhost:7094/api/worklog/entry/${workEntryId}`, { headers }).subscribe({
-        next: () => {
-          console.log(`✅ WorkEntry silindi: workEntryId=${workEntryId}`);
-          this.workMap.delete(this.getLocalDateKey(this.selectedDate!));
-          this.loadWorkEntries();
-        },
-        error: (err) => {
-          if (err.status === 404) {
-            console.warn("⚠️ WorkEntry zaten silinmiş olabilir.");
-          } else {
-            console.error("❌ WorkEntry silme hatası:", err);
-            alert("WorkEntry silme işlemi başarısız oldu.");
-          }
-        }
-      });
-    } else {
-      console.warn("⚠️ Geçersiz workEntryId, silme çağrısı atlanıyor:", workEntryId);
-    }
-
-    // 🔁 UI güncellemesi
-    setTimeout(() => {
-      this.updateCalendar();
-      this.cdr.detectChanges();
-      this.closeModal();
-    }, 500);
-  }
-
-
 
   handleSaveWorkEntry() {
     this.loadWorkEntries();

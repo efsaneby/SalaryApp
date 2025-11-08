@@ -19,7 +19,7 @@
 
     <div class="day-bottom" *ngIf="day">
       <span class="hours">
-        {{ getWorkHours(day) }}h
+        {{ formatHoursDecimal(getWorkHours(day)) }}
       </span>
       <span class="toeslag">
         €{{ getTruckStayToeslag(day) }}
@@ -29,4 +29,5 @@
 </div>
 
 <app-work-entry-modal [initialData]="modalInitialData" [selectedDate]="selectedDate" (close)="closeModal()"
-  (deleteFullDay)="handleDeleteFullDay($event.workEntryId, $event.segmentId)"(refreshRequested)="loadWorkEntries()"></app-work-entry-modal>
+  (deleteFullDay)="handleDeleteFullDay($event.workEntryId, $event.segmentId)"
+  (refreshRequested)="loadWorkEntries()"></app-work-entry-modal>

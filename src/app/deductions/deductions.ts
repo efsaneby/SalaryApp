@@ -26,7 +26,8 @@ export class Deductions {
       frequency: ['monthly'],
       type: ['fixed'],
       value: [0],
-      targetAmount: [0] // sadece yüzde için anlamlı
+      targetAmount: [''], // sadece yüzde için anlamlı
+      isReference: [false]
     });
 
   }
@@ -70,5 +71,10 @@ export class Deductions {
   get isFixed(): boolean {
     return this.deductionForm.get('type')?.value === 'fixed';
   }
+
+  isNumeric(value: any): boolean {
+    return !isNaN(parseFloat(value)) && isFinite(value);
+  }
+
 
 }

@@ -102,7 +102,15 @@
                     {{ d.type === 'percentage' ? (d.value + '%') : (d.value | currency:'EUR') }}
                 </td>
                 <td>
-                    {{ d.type === 'percentage' ? (d.targetAmount | currency:'EUR') : '-' }}
+                    <ng-container *ngIf="d.type === 'percentage'">
+                        <ng-container *ngIf="isNumeric(d.targetAmount); else referenceText">
+                            {{ d.targetAmount | currency:'EUR' }}
+                        </ng-container>
+                        <ng-template #referenceText>
+                            {{ d.targetAmount }}
+                        </ng-template>
+                    </ng-container>
+                    <ng-container *ngIf="d.type !== 'percentage'">-</ng-container>
                 </td>
                 <td>{{ d.appliedAmount | currency:'EUR' }}</td>
             </tr>
@@ -142,17 +150,17 @@
                 <td></td>
             </tr>
             <tr>
-                <td>Night Toeslag (sum): {{ payroll.nightToeslagTotal | currency:'EUR' }}</td> <!-- ✅ yeni satır -->
+                <td>Night Toeslag (sum): {{ payroll.nightToeslagTotal | currency:'EUR' }}</td>
                 <td></td>
             </tr>
             <tr>
-                <td colspan="2"><strong>Net Salary: {{ payroll.netSalary | currency:'EUR' }}</strong></td>
+                <td><strong>Total Income: {{ totalIncome | currency:'EUR' }}</strong></td>
+                <td><strong>Total Expense: {{ totalExpense | currency:'EUR' }}</strong></td>
             </tr>
         </table>
     </section>
-
     <!-- Net Salary -->
     <section class="net-salary" *ngIf="payroll">
-        <h2>💰 Net Salary: {{ payroll.netSalary | currency:'EUR' }}</h2>
+        <h2>💰 Net Salary: {{ calculatedNetSalary | currency:'EUR' }}</h2>
     </section>
 </div>

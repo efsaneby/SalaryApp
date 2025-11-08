@@ -84,6 +84,30 @@ export class Payroll implements OnInit {
     return this.payroll?.workEntries?.reduce((sum, entry) => sum + entry.netHours, 0) ?? 0;
   }
 
+  isNumeric(value: any): boolean {
+    return !isNaN(parseFloat(value)) && isFinite(value);
+  }
+
+  get totalIncome(): number {
+    const salary = this.payroll?.monthlySalary ?? 0;
+    const toeslag = this.payroll?.toeslag ?? 0;
+    const travel = this.totalTravelAllowance;
+    const overtime130 = (this.payroll?.overtimeHours130 ?? 0) * (this.payroll?.hourlyWage ?? 0) * 1.3;
+    const saturday150 = (this.payroll?.saturdayHours150 ?? 0) * (this.payroll?.hourlyWage ?? 0) * 1.5;
+    const sunday200 = (this.payroll?.sundayHours200 ?? 0) * (this.payroll?.hourlyWage ?? 0) * 2.0;
+    const nightToeslag = this.payroll?.nightToeslagTotal ?? 0;
+
+    return salary + toeslag + travel + overtime130 + saturday150 + sunday200 + nightToeslag;
+  }
+
+  get totalExpense(): number {
+    return this.payroll?.deductions ?? 0;
+  }
+
+  get calculatedNetSalary(): number {
+    return this.totalIncome - this.totalExpense;
+  }
+
 
 
 
